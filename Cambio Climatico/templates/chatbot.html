@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+
+<h2>Chatbot sobre el Cambio Climático</h2>
+
+<p>
+Selecciona o escribe uno de los 50 prompts profesionales sobre cambio climático que aparecen a continuación:
+</p>
+
+<ol class="chatbot-prompts">
+{% for prompt in prompts %}
+    <li>{{ prompt }}</li>
+{% endfor %}
+</ol>
+
+<form class="chatbot-form" method="POST">
+    <input type="text"
+        name="pregunta"
+        placeholder="Escribe tu pregunta"
+        required>
+
+    <button>
+        Preguntar
+    </button>
+</form>
+
+{% if respuesta %}
+
+<h3>
+
+Respuesta:
+
+</h3>
+
+<p>
+
+{{ respuesta }}
+
+</p>
+
+{% endif %}
+
+{% endblock %}

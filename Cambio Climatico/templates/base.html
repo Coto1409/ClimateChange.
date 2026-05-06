@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Cambio Climático</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- Favicon -->
+    <link rel="icon"
+    href="{{ url_for('static', filename='favicon.ico') }}">
+
+    <!-- Responsive (recomendado) -->
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<body>
+
+    <!-- BARRA DE NAVEGACION -->
+
+    <nav>
+
+        <a href="/">Inicio</a>
+
+        <a href="/calculadora">Calculadora</a>
+
+        <a href="/chatbot">Chatbot</a>
+
+        <a href="/memes">Memes</a>
+
+    </nav>
+
+    <!-- CONTENEDOR PRINCIPAL -->
+
+    <div class="contenedor">
+
+        {% block contenido %}
+
+        {% endblock %}
+
+    </div>
+
+</body>
+
+</html>

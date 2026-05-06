@@ -1,0 +1,202 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+
+<h2>Memes sobre el Cambio Climático</h2>
+
+<p>
+
+Haz clic en un meme para verlo en grande.
+Usa la ruedita del ratón para hacer zoom.
+Mantén presionado el mouse para mover la imagen.
+Presiona el botón "Centrar" para volver al centro.
+
+</p>
+
+<div class="memes-container">
+
+    <!-- MEME 1 -->
+
+    <div class="meme-card">
+        <h3>Meme 1</h3>
+        <img src="{{ url_for('static', filename='memes/meme1.jpg') }}"
+        class="imagen meme"
+        onclick="abrirModal(this)">
+    </div>
+
+    <!-- MEME 2 -->
+
+    <div class="meme-card">
+        <h3>Meme 2</h3>
+        <img src="{{ url_for('static', filename='memes/meme2.jpg') }}"
+        class="imagen meme"
+        onclick="abrirModal(this)">
+    </div>
+
+    <!-- MEME 3 -->
+
+    <div class="meme-card">
+        <h3>Meme 3</h3>
+        <img src="{{ url_for('static', filename='memes/meme3.jpg') }}"
+        class="imagen meme"
+        onclick="abrirModal(this)">
+    </div>
+
+    <!-- MEME 4 -->
+
+    <div class="meme-card">
+        <h3>Meme 4</h3>
+        <img src="{{ url_for('static', filename='memes/meme4.jpg') }}"
+        class="imagen meme"
+        onclick="abrirModal(this)">
+    </div>
+
+    <!-- MEME 5 -->
+
+    <div class="meme-card">
+        <h3>Meme 5</h3>
+        <img src="{{ url_for('static', filename='memes/meme5.jpg') }}"
+        class="imagen meme"
+        onclick="abrirModal(this)">
+    </div>
+
+    <!-- MEME 6 -->
+
+    <div class="meme-card">
+        <h3>Meme 6</h3>
+        <img src="{{ url_for('static', filename='memes/meme6.jpg') }}"
+        class="imagen meme"
+        onclick="abrirModal(this)">
+    </div>
+
+    <!-- MEME 7 -->
+
+    <div class="meme-card">
+        <h3>Meme 7</h3>
+        <img src="{{ url_for('static', filename='memes/meme7.jpg') }}"
+        class="imagen meme"
+        onclick="abrirModal(this)">
+    </div>
+
+</div>
+
+<!-- MODAL -->
+
+<div id="modal" class="modal">
+
+    <span class="cerrar" onclick="cerrarModal()">&times;</span>
+
+    <button class="boton-centro" onclick="centrarImagen()">
+        Centrar
+    </button>
+
+    <img class="modal-contenido"
+    id="imagenGrande">
+
+</div>
+
+<script>
+
+let escala = 1;
+let posX = 0;
+let posY = 0;
+
+let arrastrando = false;
+let inicioX;
+let inicioY;
+
+const modal = document.getElementById("modal");
+const imagen = document.getElementById("imagenGrande");
+
+function abrirModal(img) {
+
+    modal.style.display = "block";
+
+    imagen.src = img.src;
+
+    escala = 1;
+    posX = 0;
+    posY = 0;
+
+    actualizarTransform();
+
+}
+
+function cerrarModal() {
+
+    modal.style.display = "none";
+
+}
+
+function centrarImagen() {
+
+    escala = 1;
+    posX = 0;
+    posY = 0;
+
+    actualizarTransform();
+
+}
+
+function actualizarTransform() {
+
+    imagen.style.transform =
+    "translate(" + posX + "px," + posY + "px) scale(" + escala + ")";
+
+}
+
+modal.addEventListener("wheel", function(event) {
+
+    event.preventDefault();
+
+    if (event.deltaY < 0) {
+
+        escala += 0.1;
+
+    } else {
+
+        escala -= 0.1;
+
+        if (escala < 0.2) {
+
+            escala = 0.2;
+
+        }
+
+    }
+
+    actualizarTransform();
+
+});
+
+imagen.addEventListener("mousedown", function(e) {
+
+    arrastrando = true;
+
+    inicioX = e.clientX - posX;
+    inicioY = e.clientY - posY;
+
+});
+
+document.addEventListener("mousemove", function(e) {
+
+    if (arrastrando) {
+
+        posX = e.clientX - inicioX;
+        posY = e.clientY - inicioY;
+
+        actualizarTransform();
+
+    }
+
+});
+
+document.addEventListener("mouseup", function() {
+
+    arrastrando = false;
+
+});
+
+</script>
+
+{% endblock %}

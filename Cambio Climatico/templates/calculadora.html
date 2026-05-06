@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+
+<h2>EcoCalculadora de Consumo Energético</h2>
+
+<p>
+
+Calcula tu consumo energético diario y aprende a usar la energía
+de forma responsable.
+
+</p>
+
+<form method="POST">
+
+<label>Número de focos:</label>
+
+<br>
+
+<input type="number"
+name="focos"
+required>
+
+<br><br>
+
+<label>Horas de uso del televisor:</label>
+
+<br>
+
+<input type="number"
+name="tv"
+required>
+
+<br><br>
+
+<label>Número de electrodomésticos:</label>
+
+<br>
+
+<input type="number"
+name="electro"
+required>
+
+<br><br>
+
+<button type="submit">
+
+Calcular consumo
+
+</button>
+
+</form>
+
+{% if consumo %}
+
+<h3>
+
+Consumo estimado:
+
+{{ consumo }}
+
+</h3>
+
+<p>
+
+{{ mensaje }}
+
+</p>
+
+{% endif %}
+
+{% endblock %}
